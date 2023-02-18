@@ -1,0 +1,35 @@
+﻿@page
+@model QuachHengToniRazorPages.Pages.Auth.LoginModel
+@{
+	//var LoginDTO = Model.LoginDTO;
+	ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-6">
+			<div class="card p-4">
+				<h1 class="text-center mb-4">Login Page</h1>
+				@{
+					if (TempData["StatusMessage"] != null)
+					{
+						<span class="text-danger">@TempData["StatusMessage"]</span>
+					}
+				}
+				<form method="post">
+					<div class="form-group">
+						<label for="email">Email address</label>
+						<input asp-for="LoginDTO.Email" type="email" class="form-control" id="email" placeholder="Enter email">
+						<span asp-validation-for="LoginDTO.Email" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input asp-for="LoginDTO.Password" type="password" class="form-control" id="password" placeholder="Password">
+						<span asp-validation-for="LoginDTO.Password" class="text-danger"></span>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

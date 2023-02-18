@@ -1,0 +1,65 @@
+﻿@page
+@model QuachHengToniRazorPages.Pages.Auth.RegisterModel
+@{
+	var CustomerRegisterDTO = Model.CustomerRegisterDTO;
+	ViewData["Title"] = "Customer Register";
+}
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-6">
+			<div class="card p-4">
+				<h1 class="text-center mb-4">Register Page for Customer</h1>
+				@{
+					if (TempData["StatusMessage"] != null)
+					{
+								<span class="text-danger">@TempData["StatusMessage"]</span>
+					}
+				}
+				<form method="post">
+					<div class="form-group">
+						<label for="customer-name">Name</label>
+						<input asp-for="@CustomerRegisterDTO.CustomerName" type="text" class="form-control" id="customer-name" placeholder="Enter customer name">
+						<span asp-validation-for="@CustomerRegisterDTO.CustomerName" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="customer-email">Email address</label>
+						<input asp-for="@CustomerRegisterDTO.CustomerEmail" type="email" class="form-control" id="customer-email" placeholder="Enter customer email">
+						<span asp-validation-for="@CustomerRegisterDTO.CustomerEmail" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="mobile">Mobile number</label>
+						<input asp-for="@CustomerRegisterDTO.Mobile" type="text" class="form-control" id="mobile" placeholder="Enter mobile number">
+						<span asp-validation-for="@CustomerRegisterDTO.Mobile" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="identity-card">Identity card</label>
+						<input asp-for="@CustomerRegisterDTO.IdentityCard" type="text" class="form-control" id="identity-card" placeholder="Enter identity card">
+						<span asp-validation-for="@CustomerRegisterDTO.IdentityCard" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="license-number">License number</label>
+						<input asp-for="@CustomerRegisterDTO.LicenceNumber" type="text" class="form-control" id="license-number" placeholder="Enter license number">
+						<span asp-validation-for="@CustomerRegisterDTO.LicenceNumber" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="license-date">License date</label>
+						<input asp-for="@CustomerRegisterDTO.LicenceDate" type="date" class="form-control datepicker" id="license-date" placeholder="Select license date" />
+						<span asp-validation-for="@CustomerRegisterDTO.LicenceDate" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="customer-password">Password</label>
+						<input asp-for="@CustomerRegisterDTO.CustomerPassword" type="password" class="form-control" id="customer-password" placeholder="Password">
+						<span asp-validation-for="@CustomerRegisterDTO.CustomerPassword" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label for="confirm-customer-password">Confirm Password</label>
+						<input asp-for="@CustomerRegisterDTO.ConfirmCustomerPassword" type="password" class="form-control" id="confirm-customer-password" placeholder="Confirm Password">
+						<span asp-validation-for="@CustomerRegisterDTO.ConfirmCustomerPassword" class="text-danger"></span>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Register</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

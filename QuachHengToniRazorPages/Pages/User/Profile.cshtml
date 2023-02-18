@@ -1,0 +1,84 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@model QuachHengToniRazorPages.Pages.User.ProfileModel
+@{
+    var WriteStaffAccountDTO = Model.WriteStaffAccountDTO;
+    var StaffAccount = Model.StaffAccount;
+    ViewData["Title"] = "Profile";
+}
+
+@{
+    if (Accessor.HttpContext.Session.GetString("Role") == "Staff")
+    {
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <h1 class="text-center mb-4">Staff Profile</h1>
+                        @{
+                            if (TempData["StatusMessage"] != null)
+                            {
+                                <span class="text-danger">@TempData["StatusMessage"]</span>
+                            }
+                        }
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="staff-id">ID</label>
+                                <input asp-for="StaffAccount.StaffId" type="text" class="form-control" id="staff-id" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="full-name">Name</label>
+                                <input asp-for="@WriteStaffAccountDTO.FullName" placeholder="@StaffAccount.FullName" type="text" class="form-control" id="full-name">
+                                <span asp-validation-for="@WriteStaffAccountDTO.FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input asp-for="@WriteStaffAccountDTO.Email" placeholder="@StaffAccount.Email" type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="old-password">Old password</label>
+                                <input asp-for="@WriteStaffAccountDTO.OldPassword" type="password" class="form-control" id="old-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New password</label>
+                                <input asp-for ="@WriteStaffAccountDTO.NewPassword" type="password" class="form-control" id="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-new-password">Confirm new password</label>
+                                <input asp-for="@WriteStaffAccountDTO.ConfirmNewPassword" type="password" class="form-control" id="confirm-new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select asp-for="@WriteStaffAccountDTO.Role" class="form-control" id="role">
+                                    <option selected>Select role</option>
+                                    @{
+                                        if (StaffAccount.Role == 1)
+                                        {
+                                            <option value="1" selected>1</option>
+                                            <option value="2">2</option>
+                                        }
+
+                                        if (StaffAccount.Role == 2)
+                                        {
+                                            <option value="1">1</option>
+                                            <option value="2" selected>2</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    } 
+
+    if (Accessor.HttpContext.Session.GetString("Role") == "Customer")
+    {
+        <div class="container mt-5">
+            <h3>Role: Customer</h3>
+        </div>
+    }
+}

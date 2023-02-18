@@ -1,0 +1,90 @@
+﻿@page
+@model QuachHengToniRazorPages.Pages.Cars.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    var CreateCarDTO = Model.CreateCarDTO;
+}
+
+<h1>Create</h1>
+
+<h4>Car</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.CarId" class="control-label"></label>
+                <input asp-for="CreateCarDTO.CarId" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.CarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.CarName" class="control-label"></label>
+                <input asp-for="CreateCarDTO.CarName" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.CarName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CreateCarDTO.CarModelYear" class="control-label"></label>
+                <input asp-for="CreateCarDTO.CarModelYear" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.CarModelYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.Color" class="control-label"></label>
+                <input asp-for="CreateCarDTO.Color" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.Capacity" class="control-label"></label>
+                <input asp-for="CreateCarDTO.Capacity" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.Description" class="control-label"></label>
+                <input asp-for="CreateCarDTO.Description" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.ImportDate" class="control-label"></label>
+                <input asp-for="CreateCarDTO.ImportDate" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.ImportDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.RentPrice" class="control-label"></label>
+                <input asp-for="CreateCarDTO.RentPrice" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.RentPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.Status" class="control-label"></label>
+                <input asp-for="CreateCarDTO.Status" class="form-control" />
+                <span asp-validation-for="CreateCarDTO.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCarDTO.ProducerId" class="control-label"></label>
+                <select asp-for="CreateCarDTO.ProducerId" class="form-control" asp-items="ViewBag.Producers">
+                    <option value="">Choose Producer</option>
+                </select>
+            </div>
+            @*<div class="form-group">
+                <label for="role">Producer</label>
+                <select asp-for="CreateCarDTO.ProducerId" class="form-control" id="role">
+                    <option selected>Select role</option>
+                    <option value="P00001">Toyota</option>
+                    <option value="P00002">Mercedes</option>
+                        
+                </select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
