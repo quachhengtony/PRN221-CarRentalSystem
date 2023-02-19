@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace QuachHengToniRazorPages.DTO
 {
-    public class WriteCarDTO
+    public record UpdateCarDTO
     {
         [StringLength(50, MinimumLength = 3)]
         public string CarId { get; set; }
@@ -32,7 +32,7 @@ namespace QuachHengToniRazorPages.DTO
         [Range(0, 1)]
         public int? Status { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 1)]
         public string ProducerId { get; set; }
     }
 }

@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObject;
 using Repo;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+using QuachHengToniRazorPages.Helpers;
 
 namespace QuachHengToniRazorPages.Pages.Cars
 {
@@ -25,9 +28,16 @@ namespace QuachHengToniRazorPages.Pages.Cars
         [BindProperty]
         public IList<BusinessObject.Car> CarList { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (!SessionHelper.IsSignedIn(HttpContext) || HttpContext.Session.GetString("Role") != "Staff")
+            {
+                return RedirectToPage("/Auth/Login");
+            }
+
             CarList = carRepository.Retrieve();
+
+            return Page();
         }
     }
 }

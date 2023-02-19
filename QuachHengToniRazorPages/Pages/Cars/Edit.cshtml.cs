@@ -28,10 +28,10 @@ namespace QuachHengToniRazorPages.Pages.Cars
         }
 
         [BindProperty]
-        public BusinessObject.Car Car { get; set; }
+        public Car Car { get; set; }
 
         [BindProperty]
-        public WriteCarDTO WriteCarDTO { get; set; }
+        public UpdateCarDTO WriteCarDTO { get; set; }
 
         public IActionResult OnGet(string id)
         {
@@ -62,43 +62,34 @@ namespace QuachHengToniRazorPages.Pages.Cars
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public IActionResult OnPost()
+        public IActionResult OnPost(string id)
         {
             try
             {
-                //if (!ModelState.IsValid)
-                //{
-                //    TempData["StatusMessage"] = "Invalid data.";
-                //    return Page();
-                //}
+                if (!ModelState.IsValid)
+                {
+                    TempData["StatusMessage"] = "Invalid data.";
+                    return Page();
+                }
 
-                //var car = new Car()
-                //{
-                //    CarId = Car.CarId,
-                //    CarName = WriteCarDTO.CarName ?? Car.CarName,
-                //    Capacity = WriteCarDTO.Capacity ?? Car.Capacity,
-                //    CarModelYear = Car.CarModelYear ?? Car.CarModelYear,
-                //    Color = WriteCarDTO.Color ?? Car.Color,
-                //    Description = WriteCarDTO.Description ?? Car.Description,
-                //    ImportDate = WriteCarDTO.ImportDate ?? Car.ImportDate,
-                //    ProducerId = WriteCarDTO.ProducerId ?? Car.ProducerId,
-                //    RentPrice = WriteCarDTO.RentPrice ?? Car.RentPrice,
-                //    Status = WriteCarDTO.Status ?? Car.Status,
-                //};
-                Car = carRepository.RetrieveById(CarId);
+                Car = carRepository.RetrieveById(Car.CarId);
 
-                //Car.CarName = WriteCarDTO.CarName ?? Car.CarName;
-                logger.LogInformation($"carname {Car.CarName}");
-                //Car.Capacity = WriteCarDTO.Capacity ?? Car.Capacity;
-                //Car.CarModelYear = WriteCarDTO.CarModelYear ?? Car.CarModelYear;
-                //Car.Color = WriteCarDTO.Color ?? Car.Color;
-                //Car.Description = WriteCarDTO.Description ?? Car.Description;
-                //Car.ImportDate = WriteCarDTO.ImportDate ?? Car.ImportDate;
-                //Car.ProducerId  = WriteCarDTO.ProducerId ?? Car.ProducerId;
-                //Car.RentPrice = WriteCarDTO.RentPrice ?? Car.RentPrice;
-                //Car.Status = WriteCarDTO.Status ?? Car.Status;
+                if (Car == null)
+                {
+                    return NotFound();
+                }
 
-                //carRepository.Update(Car);
+                Car.CarName = WriteCarDTO.CarName ?? Car.CarName;
+                Car.Capacity = WriteCarDTO.Capacity ?? Car.Capacity;
+                Car.CarModelYear = WriteCarDTO.CarModelYear ?? Car.CarModelYear;
+                Car.Color = WriteCarDTO.Color ?? Car.Color;
+                Car.Description = WriteCarDTO.Description ?? Car.Description;
+                Car.ImportDate = WriteCarDTO.ImportDate ?? Car.ImportDate;
+                Car.ProducerId = WriteCarDTO.ProducerId ?? Car.ProducerId;
+                Car.RentPrice = WriteCarDTO.RentPrice ?? Car.RentPrice;
+                Car.Status = WriteCarDTO.Status ?? Car.Status;
+
+                carRepository.Update(Car);
 
                 return RedirectToPage("./Index");
             } 
@@ -109,10 +100,5 @@ namespace QuachHengToniRazorPages.Pages.Cars
                 return Page();
             }
         }
-
-        //private bool CarExists(string id)
-        //{
-        //    return _context.Cars.Any(e => e.CarId == id);
-        //}
     }
 }

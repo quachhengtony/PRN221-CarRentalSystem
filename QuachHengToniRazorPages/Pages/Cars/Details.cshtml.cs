@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObject;
 using Microsoft.Extensions.Logging;
 using Repo;
+using Microsoft.AspNetCore.Http;
+using QuachHengToniRazorPages.Helpers;
 
 namespace QuachHengToniRazorPages.Pages.Cars
 {
@@ -29,6 +31,11 @@ namespace QuachHengToniRazorPages.Pages.Cars
 
         public IActionResult OnGet(string id)
         {
+            if (!SessionHelper.IsSignedIn(HttpContext) || HttpContext.Session.GetString("Role") != "Staff")
+            {
+                return RedirectToPage("/Auth/Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
